@@ -61,4 +61,54 @@
       </exclusions>
     </dependency>
   </dependencies>
+
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-assembly-plugin</artifactId>
+    <configuration>
+      <encoding>UTF-8</encoding>
+      <appendAssemblyId>false</appendAssemblyId>
+      <descriptors>
+        <descriptor>src/main/assemble/package.xml</descriptor>
+      </descriptors>
+    </configuration>
+    <executions>
+      <execution>
+        <id>dist-assembly</id>
+        <phase>install</phase>
+        <goals>
+          <goal>assembly</goal>
+        </goals>
+        <configuration>
+          <encoding>UTF-8</encoding>
+          <appendAssemblyId>false</appendAssemblyId>
+          <descriptors>
+            <descriptor>src/main/assemble/package.xml</descriptor>
+          </descriptors>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
+
+  <plugin>
+    <groupId>org.apache.maven.plugins</groupId>
+    <artifactId>maven-jar-plugin</artifactId>
+    <executions>
+      <execution>
+        <id>default-jar</id>
+        <phase>package</phase>
+        <goals>
+          <goal>jar</goal>
+        </goals>
+        <configuration>
+          <excludes>
+            <exclude>mapper/**</exclude>
+            <exclude>redisscript/**</exclude>
+            <exclude>webapp/**</exclude>
+            <exclude>*.xml</exclude>
+          </excludes>
+        </configuration>
+      </execution>
+    </executions>
+  </plugin>
 </project>
